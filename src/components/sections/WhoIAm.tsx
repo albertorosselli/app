@@ -97,7 +97,7 @@ export default function WhoIAm({ copy }: { copy: WhoCopy }) {
               ref={bodyRef}
               className="text-body max-w-md"
             >
-              {copy.body}
+              {copy.body.replace('Du trenger ikke «markedsføring».', 'Du trenger ikke markedsføring som tar tid.')}
             </p>
           </div>
           

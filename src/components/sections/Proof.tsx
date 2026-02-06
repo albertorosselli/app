@@ -132,7 +132,7 @@ export default function Proof({ copy }: { copy: ProofCopy }) {
               <div className="text-lg font-semibold text-white mb-2">
                 {benefit.title}
               </div>
-              <div className="text-sm text-gray-400">
+              <div className="text-sm text-gray-200">
                 {benefit.description}
               </div>
             </div>

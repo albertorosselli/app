@@ -6,8 +6,7 @@ import { Send, Mail, ArrowUpRight, Linkedin, Twitter } from 'lucide-react'
 gsap.registerPlugin(ScrollTrigger)
 
 const socialLinks = [
-  { icon: <Twitter className="w-5 h-5" />, label: 'Twitter', href: '#' },
-  { icon: <Linkedin className="w-5 h-5" />, label: 'LinkedIn', href: '#' },
+  { icon: <Linkedin className="w-5 h-5" />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/-alberto-rosselli-/' },
 ]
 
 interface ContactCopy {
@@ -160,7 +159,7 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
         <div className="text-center mb-16 md:mb-24">
           <h2 
             ref={headlineRef}
-            className="heading-lg text-white max-w-4xl mx-auto"
+            className="text-3xl md:text-4xl font-semibold text-white max-w-4xl mx-auto leading-tight"
           >
             Gratis Google-sjekk
             <br />
@@ -171,9 +170,9 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
           <a 
             ref={emailRef}
             href="mailto:post@rosselli.no"
-            className="inline-flex items-center gap-3 mt-8 text-2xl md:text-4xl font-medium text-white hover:text-gray-300 transition-colors group"
+            className="inline-flex items-center gap-3 mt-6 text-lg md:text-2xl font-medium text-gray-300 hover:text-white transition-colors group"
           >
-            <Mail className="w-6 h-6 md:w-8 md:h-8" />
+            <Mail className="w-5 h-5 md:w-6 md:h-6" />
             post@rosselli.no
             <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </a>

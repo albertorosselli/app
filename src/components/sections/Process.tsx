@@ -93,6 +93,7 @@ export default function Process({ copy }: { copy: ProcessCopy }) {
       className="section-flowing py-24 md:py-32 relative section-light"
       style={{ zIndex: 40 }}
     >
+      <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/40 via-black/10 to-transparent pointer-events-none" />
       <div className="px-6 md:px-12 lg:px-24">
         {/* Section Header */}
         <div ref={headingRef} className="mb-16 md:mb-24 text-center">
