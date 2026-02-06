@@ -6,18 +6,12 @@ import { ArrowDown, ArrowRight } from 'lucide-react'
 gsap.registerPlugin(ScrollTrigger)
 
 interface HeroProps {
-  onScrollToWork: () => void
+  onScrollToWork?: () => void
   onScrollToContact: () => void
-  copy: {
-    headline: string
-    subhead: string
-    body: string
-    primaryCta: string
-    secondaryCta: string
-  }
+  copy: any
 }
 
-export default function Hero({ onScrollToWork, onScrollToContact, copy }: HeroProps) {
+export default function Hero({ onScrollToWork: _onScrollToWork = () => {}, onScrollToContact, copy }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const headlineRef = useRef<HTMLHeadingElement>(null)
   const subtextRef = useRef<HTMLParagraphElement>(null)

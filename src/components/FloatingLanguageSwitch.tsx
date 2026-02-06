@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface FloatingLanguageSwitchProps {
   active: 'no' | 'en'
   onChange: (value: 'no' | 'en') => void

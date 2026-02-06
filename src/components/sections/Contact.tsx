@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Send, Mail, ArrowUpRight, Linkedin, Twitter } from 'lucide-react'
+import { Send, Mail, ArrowUpRight, Linkedin } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
