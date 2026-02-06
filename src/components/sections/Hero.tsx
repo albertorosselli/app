@@ -116,7 +116,7 @@ export default function Hero({ onScrollToWork, onScrollToContact, copy }: HeroPr
         >
           {copy.headline}
           <br />
-          <span className="text-gray-400">{copy.subhead}</span>
+          <span className="text-gray-500 opacity-80 font-normal">{copy.subhead}</span>
         </h1>
         
         <p 
