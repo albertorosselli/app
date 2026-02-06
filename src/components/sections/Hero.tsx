@@ -129,7 +129,7 @@ export default function Hero({ onScrollToWork: _onScrollToWork = () => {}, onScr
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
           <button 
-            onClick={onScrollToContact}
+            onClick={_onScrollToWork}
             className="magnetic-button px-8 py-4 border border-white/30 text-white font-medium rounded-full hover:bg-white/10 transition-colors"
           >
             {copy.secondaryCta}
