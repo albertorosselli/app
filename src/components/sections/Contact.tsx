@@ -161,19 +161,19 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
             ref={headlineRef}
             className="text-3xl md:text-4xl font-semibold text-white max-w-4xl mx-auto leading-tight"
           >
-            Gratis Google-sjekk
+            {copy.headline}
             <br />
-            <span className="text-gray-500">Tar 2 minutter. Ingen binding.</span>
+            <span className="text-gray-500">{copy.sub}</span>
           </h2>
           
           {/* Email Link */}
           <a 
             ref={emailRef}
-            href="mailto:post@rosselli.no"
+            href={`mailto:${copy.emailLink}`}
             className="inline-flex items-center gap-3 mt-6 text-lg md:text-2xl font-medium text-gray-300 hover:text-white transition-colors group"
           >
             <Mail className="w-5 h-5 md:w-6 md:h-6" />
-            post@rosselli.no
+            {copy.emailLink}
             <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </a>
         </div>
@@ -189,15 +189,15 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
               <div className="w-16 h-16 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center mx-auto mb-6">
                 <Send className="w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Takk! Meldingen er sendt.</h3>
-              <p className="text-gray-500">Jeg svarer innen ett arbeidsdøgn.</p>
+              <h3 className="text-2xl font-bold text-white mb-2">{copy.successTitle}</h3>
+              <p className="text-gray-500">{copy.successBody}</p>
             </div>
           ) : (
             <div className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
-                    Navn
+                    {copy.name}
                   </label>
                   <input
                     type="text"
@@ -206,12 +206,12 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
                     onChange={handleChange}
                     required
                     className="form-input"
-                    placeholder="Navnet ditt"
+                    placeholder={copy.name}
                   />
                 </div>
                 <div>
                   <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
-                    E-post
+                    {copy.email}
                   </label>
                   <input
                     type="email"
@@ -220,14 +220,14 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
                     onChange={handleChange}
                     required
                     className="form-input"
-                    placeholder="din@email.com"
+                    placeholder={copy.email}
                   />
                 </div>
               </div>
               
               <div>
                 <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
-                  Hva vil du ha hjelp med?
+                  {copy.message}
                 </label>
                 <textarea
                   name="message"
@@ -236,7 +236,7 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
                   required
                   rows={4}
                   className="form-input resize-none"
-                  placeholder="Kort om bedriften og hva du ønsker"
+                  placeholder={copy.messagePlaceholder}
                 />
               </div>
               
@@ -248,11 +248,11 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
                 {isSubmitting ? (
                   <>
                     <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-                    Sending...
+                    {copy.submitting}
                   </>
                 ) : (
                   <>
-                    Få gratis Google-sjekk
+                    {copy.submit}
                     <Send className="w-4 h-4" />
                   </>
                 )}
