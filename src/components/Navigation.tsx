@@ -69,12 +69,12 @@ export default function Navigation({ onScrollToSection, copy }: NavigationProps)
             </button>
             
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-8 text-base">
               {copy.items.map((item) => (
                 <button
                   key={item.section}
                   onClick={() => handleNavClick(item.section)}
-                  className="nav-link text-sm text-gray-300 hover:text-white transition-colors"
+                  className="nav-link text-base text-gray-200 hover:text-white transition-colors"
                 >
                   {item.label}
                 </button>

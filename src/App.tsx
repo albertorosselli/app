@@ -79,7 +79,7 @@ function App() {
     const data = {
       no: {
         nav: {
-          logo: 'Googleklar',
+          logo: 'Web-Klar',
           items: [
             { label: 'Dette får du', section: 'proof' },
             { label: 'Hva vi gjør', section: 'work' },
@@ -89,7 +89,7 @@ function App() {
           cta: 'Få gratis Google-sjekk',
         },
         hero: {
-          headline: 'Googleklar for små bedrifter',
+          headline: 'Web-Klar for små bedrifter',
           subhead: 'Enkel nettside og Google-oppsett',
           body: 'En enkel nettside og Google-oppsett som gjør at kunder finner deg og tar kontakt. For deg som driver alene eller er en liten bedrift.',
           primaryCta: 'Få gratis Google-sjekk',
@@ -97,7 +97,7 @@ function App() {
         },
         who: {
           heading: 'Dette er for deg som',
-          body: 'Du trenger ikke «markedsføring». Du trenger å være synlig når folk søker. Googleklar er laget for små bedrifter som vil bli funnet uten annonser og uten å bruke tid på teknisk tull.',
+          body: 'Du trenger ikke «markedsføring». Du trenger å være synlig når folk søker. Web-Klar er laget for små bedrifter som vil bli funnet uten annonser og uten å bruke tid på teknisk tull.',
           bullets: [
             'Jobber alene eller med få ansatte',
             'Lever av lokale kunder',
@@ -107,7 +107,7 @@ function App() {
         },
         work: {
           sectionLabel: 'Del 02',
-          heading: 'Hva Googleklar gjør',
+          heading: 'Hva Web-Klar gjør',
           projects: [
             {
               id: 1,
@@ -175,16 +175,16 @@ function App() {
           submitting: 'Sender...',
           successTitle: 'Takk! Meldingen er sendt.',
           successBody: 'Jeg svarer innen ett arbeidsdøgn.',
-          footerLine1: 'Googleklar',
+          footerLine1: 'Web-Klar',
           footerLine2: 'Enkle nettsider og Google-oppsett for små bedrifter',
           footerLine3: 'IT-ingeniør med over 15 års erfaring',
           footerLine4: 'Basert i Norge — Språk: NO | EN',
-          emailLink: 'post@rosselli.no',
+          emailLink: 'post@web-klar.no',
         },
       },
       en: {
         nav: {
-          logo: 'Googleklar',
+          logo: 'Web-Klar',
           items: [
             { label: 'What you get', section: 'proof' },
             { label: 'What we do', section: 'work' },
@@ -194,7 +194,7 @@ function App() {
           cta: 'Get free Google check',
         },
         hero: {
-          headline: 'Googleklar for small businesses',
+          headline: 'Web-Klar for small businesses',
           subhead: 'Simple website and Google setup',
           body: 'A simple site and Google setup so customers find you and contact you. For solo operators and small businesses.',
           primaryCta: 'Get free Google check',
@@ -202,7 +202,7 @@ function App() {
         },
         who: {
           heading: 'This is for you who',
-          body: 'You do not need “marketing”. You need to be visible when people search. Googleklar is built for small businesses that want to be found without ads and without spending time on tech.',
+          body: 'You do not need “marketing”. You need to be visible when people search. Web-Klar is built for small businesses that want to be found without ads and without spending time on tech.',
           bullets: [
             'Work alone or with a small team',
             'Rely on local customers',
@@ -212,7 +212,7 @@ function App() {
         },
         work: {
           sectionLabel: 'Part 02',
-          heading: 'What Googleklar does',
+          heading: 'What Web-Klar does',
           projects: [
             {
               id: 1,
@@ -280,11 +280,11 @@ function App() {
           submitting: 'Sending...',
           successTitle: 'Thanks! Message sent.',
           successBody: 'I reply within one business day.',
-          footerLine1: 'Googleklar',
+          footerLine1: 'Web-Klar',
           footerLine2: 'Simple sites and Google setup for small businesses',
           footerLine3: 'IT engineer with 15+ years of experience',
           footerLine4: 'Based in Norway — Languages: NO | EN',
-          emailLink: 'post@rosselli.no',
+          emailLink: 'post@web-klar.no',
         },
       },
     }

@@ -113,7 +113,7 @@ export default function WhoIAm({ copy }: { copy: WhoCopy }) {
                   <span className="text-gray-600 text-sm font-mono">
                     0{index + 1}
                   </span>
-                  <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white/90 group-hover:text-white transition-colors duration-300 tracking-tight">
+                  <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white/90 group-hover:text-white transition-colors duration-300 tracking-tight py-1">
                     {keyword}
                   </h3>
                 </div>

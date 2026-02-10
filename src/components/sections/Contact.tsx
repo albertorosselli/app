@@ -285,7 +285,7 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-2xl font-bold tracking-tighter text-white">
-              Googleklar
+              Web-Klar
             </div>
             <div className="text-sm text-gray-500">
               Enkle nettsider og Google-oppsett for små bedrifter

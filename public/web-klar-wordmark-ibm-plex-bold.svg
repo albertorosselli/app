@@ -1,0 +1,12 @@
+<!-- web-klar-wordmark-ibm-plex-bold.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="160" viewBox="0 0 640 160" role="img" aria-label="Web-Klar">
+  <rect width="100%" height="100%" fill="none"/>
+  <text x="32" y="112"
+        font-family="IBM Plex Sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+        font-size="88"
+        font-weight="800"
+        letter-spacing="-0.6"
+        fill="#111111">
+    Web-Klar
+  </text>
+</svg>
