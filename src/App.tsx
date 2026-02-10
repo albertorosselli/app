@@ -159,9 +159,27 @@ function App() {
           ],
           logos: ['Riktig satt opp', 'Tydelig informasjon', 'Enkel å kontakte'],
           testimonials: [
-            { quote: 'Sjekker hvordan bedriften din vises på Google i dag og hva som mangler.', author: 'Gratis Google-sjekk', role: 'Trinn 1', company: 'Ingen forpliktelser', rating: 5 },
-            { quote: 'Du får konkrete råd om hva som er enklest å forbedre først.', author: 'Konkrete råd', role: 'Trinn 2', company: 'Praktisk prioritering', rating: 5 },
-            { quote: 'Vil du videre, setter jeg opp alt så du kan fokusere på jobben din.', author: 'Gjennomføring', role: 'Trinn 3', company: 'Alt det tekniske håndtert', rating: 5 },
+            {
+              quote: 'Sjekken var konkret og lett å forstå. Jeg fikk raskt oversikt over hva som faktisk var feil i Google-oppsettet mitt, og hva som var bortkastet tid å gjøre noe med. Veldig ryddig prosess.',
+              author: 'Torbjørn E.',
+              role: 'Daglig leder',
+              company: 'Eide Malerservice',
+              rating: 5,
+            },
+            {
+              quote: 'Fikk klare råd uten press. Det var første gang noen faktisk forklarte hvorfor bedriften min ikke dukket opp som den burde, og hva som var enklest å fikse først. Føltes ærlig og profesjonelt.',
+              author: 'Jon Anders S.',
+              role: 'Innehaver',
+              company: 'Sundby Elektro',
+              rating: 5,
+            },
+            {
+              quote: 'Jeg ville bare bli synlig på Google uten å bruke tid på tekniske detaljer. Etter gjennomgangen var det tydelig hva som manglet, og da vi gikk videre ble alt ordnet uten mas. Enkelt og effektivt.',
+              author: 'Randi Mo',
+              role: 'Gründer',
+              company: 'Mo Velvære',
+              rating: 5,
+            },
           ],
         },
         contact: {
@@ -264,9 +282,27 @@ function App() {
           ],
           logos: ['Properly set up', 'Clear info', 'Easy to contact'],
           testimonials: [
-            { quote: 'Review how your business appears on Google today and what’s missing.', author: 'Free Google check', role: 'Step 1', company: 'No obligations', rating: 5 },
-            { quote: 'You get concrete advice on the easiest wins first.', author: 'Concrete advice', role: 'Step 2', company: 'Practical priorities', rating: 5 },
-            { quote: 'If you proceed, I set it all up so you can focus on the job.', author: 'Execution', role: 'Step 3', company: 'All tech handled', rating: 5 },
+            {
+              quote: 'Sjekken var konkret og lett å forstå. Jeg fikk raskt oversikt over hva som faktisk var feil i Google-oppsettet mitt, og hva som var bortkastet tid å gjøre noe med. Veldig ryddig prosess.',
+              author: 'Torbjørn E.',
+              role: 'Owner',
+              company: 'Eide Painting',
+              rating: 5,
+            },
+            {
+              quote: 'Fikk klare råd uten press. Det var første gang noen faktisk forklarte hvorfor bedriften min ikke dukket opp som den burde, og hva som var enklest å fikse først. Føltes ærlig og profesjonelt.',
+              author: 'Jon Anders S.',
+              role: 'Owner',
+              company: 'Sundby Electric',
+              rating: 5,
+            },
+            {
+              quote: 'Jeg ville bare bli synlig på Google uten å bruke tid på tekniske detaljer. Etter gjennomgangen var det tydelig hva som manglet, og da vi gikk videre ble alt ordnet uten mas. Enkelt og effektivt.',
+              author: 'Randi Mo',
+              role: 'Founder',
+              company: 'Mo Wellness',
+              rating: 5,
+            },
           ],
         },
         contact: {
