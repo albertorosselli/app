@@ -48,6 +48,7 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -137,6 +138,7 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitError(null)
     
     try {
       const res = await fetch('/api/submit-audit', {
@@ -149,6 +151,7 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
       setFormData({ name: '', business: '', website: '', location: '', email: '', message: '' })
     } catch (error) {
       console.error(error)
+      setSubmitError('Vi fikk ikke kontakt med serveren. Prøv igjen om litt, eller send e-post til post@web-klar.no.')
     } finally {
       setIsSubmitting(false)
     }
@@ -207,6 +210,11 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
             </div>
           ) : (
             <div className="space-y-8">
+              {submitError && (
+                <div className="rounded-xl border border-red-500/40 bg-red-500/10 text-red-200 px-4 py-3 text-sm">
+                  {submitError}
+                </div>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
