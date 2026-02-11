@@ -13,6 +13,9 @@ interface ContactCopy {
   headline: string
   sub: string
   name: string
+  business: string
+  website: string
+  location: string
   email: string
   message: string
   messagePlaceholder: string
@@ -37,8 +40,10 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
   
   const [formData, setFormData] = useState({
     name: '',
+    business: '',
+    website: '',
+    location: '',
     email: '',
-    budget: '',
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -133,12 +138,20 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
-    setIsSubmitting(false)
-    setSubmitted(true)
-    setFormData({ name: '', email: '', budget: '', message: '' })
+    try {
+      const res = await fetch('/api/submit-audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+      if (!res.ok) throw new Error('Server error')
+      setSubmitted(true)
+      setFormData({ name: '', business: '', website: '', location: '', email: '', message: '' })
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -206,9 +219,56 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
                     onChange={handleChange}
                     required
                     className="form-input"
-                    placeholder={copy.name}
+                  placeholder={copy.name}
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
+                  {copy.business}
+                </label>
+                <input
+                  type="text"
+                  name="business"
+                  value={formData.business}
+                  onChange={handleChange}
+                  required
+                  className="form-input"
+                  placeholder={copy.business}
+                />
+              </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
+                    {copy.website}
+                  </label>
+                  <input
+                    type="url"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    className="form-input"
+                    placeholder={copy.website}
                   />
                 </div>
+                <div>
+                  <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
+                    {copy.location}
+                  </label>
+                  <input
+                    type="text"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleChange}
+                    required
+                    className="form-input"
+                    placeholder={copy.location}
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
                     {copy.email}
@@ -223,21 +283,19 @@ export default function Contact({ copy }: { copy: ContactCopy }) {
                     placeholder={copy.email}
                   />
                 </div>
-              </div>
-              
-              <div>
-                <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
-                  {copy.message}
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={4}
-                  className="form-input resize-none"
-                  placeholder={copy.messagePlaceholder}
-                />
+                <div>
+                  <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
+                    {copy.message}
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows={4}
+                    className="form-input resize-none"
+                    placeholder={copy.messagePlaceholder}
+                  />
+                </div>
               </div>
               
               <button
