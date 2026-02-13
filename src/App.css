@@ -101,3 +101,19 @@ a, button {
     background-color: rgba(0, 0, 0, 0.9);
   }
 }
+
+/* Floating back-to-top button keeps readable text across bright/dark sections */
+.back-to-top-button {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background-color: rgba(255, 255, 255, 0.38);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+}
+
+.back-to-top-button--light {
+  color: #111827;
+}
+
+.back-to-top-button--dark {
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.38);
+}

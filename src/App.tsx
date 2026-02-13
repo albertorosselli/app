@@ -23,11 +23,14 @@ gsap.registerPlugin(ScrollTrigger)
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
+  const [showBackToTop, setShowBackToTop] = useState(false)
+  const [useDarkBackToTopText, setUseDarkBackToTopText] = useState(false)
   const [lang, setLang] = useState<'no' | 'en'>(
     (localStorage.getItem('lang') as 'no' | 'en') || 'no'
   )
   const mainRef = useRef<HTMLElement>(null)
   const lenisRef = useRef<Lenis | null>(null)
+  const backToTopButtonRef = useRef<HTMLButtonElement>(null)
   
   // Section refs for navigation
   const workRef = useRef<HTMLDivElement>(null)
@@ -376,6 +379,107 @@ function App() {
   const scrollToContact = useCallback(() => {
     scrollToSection('contact')
   }, [scrollToSection])
+
+  const scrollToTop = useCallback(() => {
+    const lenis = lenisRef.current
+    if (lenis) {
+      lenis.scrollTo(0, {
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      })
+      return
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
+  useEffect(() => {
+    if (isLoading) return
+
+    const updateBackToTopVisibility = () => {
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
+      if (scrollableHeight <= 0) {
+        setShowBackToTop(false)
+        return
+      }
+
+      const hasPassedThreshold = window.scrollY / scrollableHeight > 0.25
+      setShowBackToTop((prev) => (prev === hasPassedThreshold ? prev : hasPassedThreshold))
+    }
+
+    updateBackToTopVisibility()
+    window.addEventListener('scroll', updateBackToTopVisibility, { passive: true })
+    window.addEventListener('resize', updateBackToTopVisibility)
+
+    return () => {
+      window.removeEventListener('scroll', updateBackToTopVisibility)
+      window.removeEventListener('resize', updateBackToTopVisibility)
+    }
+  }, [isLoading])
+
+  useEffect(() => {
+    if (isLoading) return
+
+    let rafId: number | null = null
+
+    const parseRgb = (value: string): [number, number, number, number] | null => {
+      const match = value.match(/rgba?\(([^)]+)\)/)
+      if (!match) return null
+      const parts = match[1].split(',').map((part) => Number(part.trim()))
+      if (parts.length < 3) return null
+      const [r, g, b] = parts
+      const a = parts.length >= 4 ? parts[3] : 1
+      return [r, g, b, Number.isFinite(a) ? a : 1]
+    }
+
+    const getUnderlyingLuminance = (start: Element | null) => {
+      let el: Element | null = start
+      while (el && el !== document.documentElement) {
+        const parsed = parseRgb(window.getComputedStyle(el).backgroundColor)
+        if (parsed && parsed[3] > 0.05) {
+          const [r, g, b, a] = parsed
+          const compositeR = r * a + 255 * (1 - a)
+          const compositeG = g * a + 255 * (1 - a)
+          const compositeB = b * a + 255 * (1 - a)
+          return (0.2126 * compositeR + 0.7152 * compositeG + 0.0722 * compositeB) / 255
+        }
+        el = el.parentElement
+      }
+      return 1
+    }
+
+    const updateBackToTopTextColor = () => {
+      rafId = null
+      const button = backToTopButtonRef.current
+      if (!button) return
+
+      const rect = button.getBoundingClientRect()
+      const sampleX = Math.max(0, Math.min(window.innerWidth - 1, rect.left + rect.width / 2))
+      const sampleY = rect.bottom + 6 < window.innerHeight ? rect.bottom + 6 : Math.max(0, rect.top - 6)
+
+      const underlyingElement = document.elementFromPoint(sampleX, sampleY)
+      const luminance = getUnderlyingLuminance(underlyingElement)
+      const shouldUseDarkText = luminance > 0.72
+      setUseDarkBackToTopText((prev) => (prev === shouldUseDarkText ? prev : shouldUseDarkText))
+    }
+
+    const scheduleUpdate = () => {
+      if (rafId !== null) return
+      rafId = window.requestAnimationFrame(updateBackToTopTextColor)
+    }
+
+    scheduleUpdate()
+    window.addEventListener('scroll', scheduleUpdate, { passive: true })
+    window.addEventListener('resize', scheduleUpdate)
+
+    return () => {
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId)
+      }
+      window.removeEventListener('scroll', scheduleUpdate)
+      window.removeEventListener('resize', scheduleUpdate)
+    }
+  }, [isLoading, showBackToTop])
   
   // Setup section markers for ScrollTrigger
   useEffect(() => {
@@ -403,6 +507,40 @@ function App() {
           active={lang}
           onChange={(value) => setLang(value)}
         />
+      )}
+
+      {!isLoading && (
+        <button
+          ref={backToTopButtonRef}
+          type="button"
+          onClick={scrollToTop}
+          aria-label={lang === 'no' ? 'Til toppen' : 'Back to top'}
+          className={`back-to-top-button ${
+            useDarkBackToTopText ? 'back-to-top-button--light' : 'back-to-top-button--dark'
+          } fixed bottom-24 right-6 z-40 rounded-full p-2 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 md:right-8 ${
+            showBackToTop
+              ? 'translate-y-0 opacity-100 pointer-events-auto'
+              : 'translate-y-4 opacity-0 pointer-events-none'
+          }`}
+        >
+          <svg
+            width="44"
+            height="44"
+            viewBox="0 0 120 120"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <circle cx="60" cy="60" r="55" fill="currentColor" fillOpacity="0.2" />
+            <path
+              d="M60 35 L60 85 M40 55 L60 35 L80 55"
+              stroke="currentColor"
+              strokeWidth="8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
+          </svg>
+        </button>
       )}
       
       {/* Grain Overlay */}
