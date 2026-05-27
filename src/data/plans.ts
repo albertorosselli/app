@@ -35,8 +35,13 @@ export interface Plan {
 /** Arriendo de servidor local. Independiente del plan elegido. */
 export interface ServerLease {
   name: string
+  /** Canon recurrente del arriendo. */
   price: number
   billingCycle: BillingCycle
+  /** Cuota inicial: pago único NO reembolsable al iniciar el arriendo. */
+  cuotaInicial: number
+  /** Depósito de garantía REEMBOLSABLE sobre el equipo. */
+  deposit: number
   summary: string
   includes: string[]
   note: string
@@ -115,6 +120,8 @@ export const serverLease: ServerLease = {
   name: 'Servidor local en arriendo',
   price: 75_000,
   billingCycle: 'monthly',
+  cuotaInicial: 150_000,
+  deposit: 250_000,
   summary: 'Para negocios que prefieren no comprar hardware desde el inicio.',
   includes: [
     'Servidor Dell OptiPlex listo para operar',
