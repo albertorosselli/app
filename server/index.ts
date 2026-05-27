@@ -3,6 +3,7 @@ import cors from 'cors'
 import fs from 'fs'
 import path from 'path'
 import nodemailer from 'nodemailer'
+import Stripe from 'stripe'
 import { fileURLToPath } from 'url'
 import { runAudit, defaultAdapters } from '../src/lib/googleCheck'
 
@@ -72,6 +73,44 @@ app.post('/api/submit-audit', async (req, res) => {
   } catch (err) {
     console.error(err)
     res.status(500).json({ error: 'Server error' })
+  }
+})
+
+// Stripe: arriendo de servidor (canon recurrente + cuota inicial + depósito
+// en la primera factura). El software se vende con Payment Links, sin código.
+const stripe = process.env.STRIPE_SECRET_KEY
+  ? new Stripe(process.env.STRIPE_SECRET_KEY)
+  : null
+
+app.post('/api/checkout/server-lease', async (_req, res) => {
+  if (!stripe) {
+    return res.status(503).json({ error: 'Stripe no está configurado' })
+  }
+
+  const leasePrice = process.env.STRIPE_PRICE_SERVER_LEASE
+  const cuotaInicialPrice = process.env.STRIPE_PRICE_CUOTA_INICIAL
+  const depositPrice = process.env.STRIPE_PRICE_DEPOSIT
+
+  if (!leasePrice || !cuotaInicialPrice || !depositPrice) {
+    return res.status(500).json({ error: 'Faltan IDs de precio de Stripe' })
+  }
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      mode: 'subscription',
+      line_items: [
+        { price: leasePrice, quantity: 1 },
+        { price: cuotaInicialPrice, quantity: 1 },
+        { price: depositPrice, quantity: 1 },
+      ],
+      consent_collection: { terms_of_service: 'required' },
+      success_url: `${process.env.CHECKOUT_SUCCESS_URL ?? 'http://localhost:5173/gracias'}?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: process.env.CHECKOUT_CANCEL_URL ?? 'http://localhost:5173/',
+    })
+    res.json({ url: session.url })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: 'No se pudo crear la sesión de pago' })
   }
 })
 
